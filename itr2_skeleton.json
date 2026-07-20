@@ -1,0 +1,196 @@
+{
+  "_template_note": "DATA-FREE ITR-2 skeleton for AY 2026-27, derived from a known-valid return structure. All amounts are 0 and all identifiers are <...> placeholders. Fill values, set FilingStatus.OptOutNewTaxRegime ('N' = new regime), remove this _template_note before upload, and VALIDATE against the official ITR-2 schema / offline utility. Use only after the ITR-1-vs-ITR-2 gate (SKILL.md section 0.5) points to ITR-2. The ScheduleSI rate table and ScheduleAMTC year rows are static reference data kept with 0 income.",
+  "ITR": {
+    "ITR2": {
+      "CreationInfo": {
+        "SWVersionNo": "R1",
+        "SWCreatedBy": "<SW-ID or SELF>",
+        "JSONCreatedBy": "<SW-ID or SELF>",
+        "JSONCreationDate": "<YYYY-MM-DD>",
+        "IntermediaryCity": "<City>",
+        "Digest": "-"
+      },
+      "Form_ITR2": {
+        "FormName": "ITR-2",
+        "Description": "For Individuals and HUFs not having income from profits and gains of business or profession",
+        "AssessmentYear": "2026",
+        "SchemaVer": "Ver1.0",
+        "FormVer": "Ver1.0"
+      },
+      "PartA_GEN1": {
+        "PersonalInfo": {
+          "AssesseeName": { "FirstName": "<First>", "MiddleName": "", "SurNameOrOrgName": "<Surname>" },
+          "PAN": "<PAN>",
+          "AadhaarCardNo": "<12-digit Aadhaar>",
+          "Address": {
+            "ResidenceNo": "<Flat/House>",
+            "ResidenceName": "",
+            "RoadOrStreet": "<Street>",
+            "LocalityOrArea": "<Area>",
+            "CityOrTownOrDistrict": "<City>",
+            "StateCode": "<2-digit state code>",
+            "CountryCode": "91",
+            "PinCode": 0,
+            "CountryCodeMobile": 91,
+            "MobileNo": 0,
+            "EmailAddress": "<email>"
+          },
+          "DOB": "<YYYY-MM-DD>",
+          "Status": "I"
+        },
+        "FilingStatus": {
+          "AsseseeRepFlg": "N",
+          "ReturnFileSec": 11,
+          "ItrFilingDueDate": "2026-07-31",
+          "OptOutNewTaxRegime": "N",
+          "PortugeseCC5A": "N",
+          "SeventhProvisio139": "N",
+          "ResidentialStatus": "RES",
+          "ConditionsResStatus": "1",
+          "BenefitUs115HFlg": "N",
+          "FiiFpiFlag": "N",
+          "CompDirectorPrvYrFlg": "N",
+          "HeldUnlistedEqShrPrYrFlg": "N"
+        }
+      },
+      "Verification": {
+        "Declaration": {
+          "AssesseeVerName": "<Name>",
+          "AssesseeVerPAN": "<PAN>",
+          "FatherName": "<Father Name>"
+        },
+        "Capacity": "S",
+        "Place": "<Place>",
+        "Date": "<YYYY-MM-DD>"
+      },
+      "ScheduleVIA": {
+        "UsrDeductUndChapVIA": { "Section80GGA": 0, "Section80D": 0, "Section80G": 0, "Section80DDB": 0, "TotalChapVIADeductions": 0 },
+        "DeductUndChapVIA": { "Section80GGA": 0, "AnyOthSec80CCH": 0, "Section80CCDEmployer": 0, "Section80TTB": 0, "Section80D": 0, "Section80G": 0, "TotalChapVIADeductions": 0 }
+      },
+      "ScheduleS": {
+        "TotalGrossSalary": 0,
+        "NetSalary": 0,
+        "DeductionUS16": 0,
+        "TotIncUnderHeadSalaries": 0,
+        "AllwncExtentExemptUs10": 0,
+        "Section16ia": 0,
+        "EntertainmntalwncU16ii": 0,
+        "ProfessionalTaxUs16iii": 0
+      },
+      "ScheduleOS": {
+        "IncOthThanOwnRaceHorse": {
+          "IntrstFrmTermDeposit": 0,
+          "IntrstFrmSavingBank": 0,
+          "DividendOthThan22e": 0,
+          "IntrstFrmIncmTaxRefund": 0,
+          "IntrstFrmOthers": 0,
+          "DividendGross": 0,
+          "InterestGross": 0,
+          "Deductions": { "Depreciation": 0, "DeductionUs57iia": 0, "IntExp57": 0, "Expenses": 0, "TotDeductions": 0 },
+          "GrossIncChrgblTaxAtAppRate": 0,
+          "BalanceNoRaceHorse": 0,
+          "FamilyPension": 0
+        },
+        "DividendIncUs115BBDA": { "DateRange": { "Upto15Of6": 0, "Upto15Of9": 0, "Up16Of9To15Of12": 0, "Up16Of12To15Of3": 0, "Up16Of3To31Of3": 0 } },
+        "TotOthSrcNoRaceHorse": 0,
+        "IncChargeable": 0
+      },
+      "ScheduleCGFor23": {
+        "ShortTermCapGainFor23": { "TotalSTCG": 0, "TotalAmtDeemedStcg": 0, "PassThrIncNatureSTCG": 0 },
+        "LongTermCapGain23": {
+          "SaleOfEquityShareUs112A": { "BalanceCG": 0, "CapgainonAssets": 0, "DeductionUs54F": 0 },
+          "TotalLTCG": 0,
+          "TotalAmtDeemedLtcg": 0,
+          "PassThrIncNatureLTCG": 0
+        },
+        "IncmFromVDATrnsf": 0,
+        "SumOfCGIncm": 0,
+        "TotScheduleCGFor23": 0,
+        "AccruOrRecOfCG": {
+          "LongTermUnder12_5Per": { "DateRange": { "Upto15Of6": 0, "Upto15Of9": 0, "Up16Of9To15Of12": 0, "Up16Of12To15Of3": 0, "Up16Of3To31Of3": 0 } }
+        }
+      },
+      "Schedule112A": {
+        "Schedule112ADtls": [],
+        "SaleValue112A": 0,
+        "CostAcqWithoutIndx112A": 0,
+        "AcquisitionCost112A": 0,
+        "LTCGBeforelowerB1B2112A": 0,
+        "FairMktValueCapAst112A": 0,
+        "ExpExclCnctTransfer112A": 0,
+        "Deductions112A": 0,
+        "Balance112A": 0,
+        "TotalBalance112A": 0
+      },
+      "_note_112A_row": "For each equity/eq-MF lot add to Schedule112ADtls: {ShareOnOrBefore: 'AE' (after 31-Jan-2018) or 'BE', ISINCode, ShareUnitName, NumSharesUnits, SalePricePerShareUnit, TotSaleValue, CostAcqWithoutIndx, AcquisitionCost, FairMktValuePerShareunit, TotFairMktValueCapAst, ExpExclCnctTransfer, TotalDeductions, Balance}. Consolidated entry ('CONSOLIDATED'/'INNOTREQUIRD') is also accepted.",
+      "ScheduleSI": {
+        "SplCodeRateTax": [
+          { "SecCode": "1A", "SplRatePercent": 20, "SplRateInc": 0, "SplRateIncTax": 0 },
+          { "SecCode": "21", "SplRatePercent": 12.5, "SplRateInc": 0, "SplRateIncTax": 0 },
+          { "SecCode": "22", "SplRatePercent": 12.5, "SplRateInc": 0, "SplRateIncTax": 0 },
+          { "SecCode": "2A", "SplRatePercent": 12.5, "SplRateInc": 0, "SplRateIncTax": 0 }
+        ],
+        "TotSplRateInc": 0,
+        "TotSplRateIncTax": 0,
+        "_note": "Populate only the special-rate rows that apply (e.g. 2A = LTCG 112A @12.5%, 1A = STCG 111A @20%). The offline utility auto-expands the full static rate table; do not hand-maintain all codes."
+      },
+      "ScheduleTDS1": { "TotalTDSonSalaries": 0, "TDSonSalary": [] },
+      "ScheduleTDS2": { "TotalTDSonOthThanSals": 0, "TDSOthThanSalaryDtls": [] },
+      "ScheduleTDS3": { "TotalTDS3OnOthThanSal": 0 },
+      "ScheduleTCS": { "TotalSchTCS": 0 },
+      "ScheduleIT": { "TotalTaxPayments": 0 },
+      "ScheduleCYLA": {
+        "OthSrcExclRaceHorse": { "IncCYLA": { "IncOfCurYrUnderThatHead": 0, "HPlossCurYrSetoff": 0, "IncOfCurYrAfterSetOff": 0 } },
+        "LTCG12_5Per": { "IncCYLA": { "IncOfCurYrUnderThatHead": 0, "OthSrcLossNoRaceHorseSetoff": 0, "HPlossCurYrSetoff": 0, "IncOfCurYrAfterSetOff": 0 } }
+      },
+      "ScheduleBFLA": {
+        "OthSrcExclRaceHorse": { "IncBFLA": { "IncOfCurYrUndHeadFromCYLA": 0, "IncOfCurYrAfterSetOffBFLosses": 0 } },
+        "LTCG12_5Per": { "IncBFLA": { "IncOfCurYrUndHeadFromCYLA": 0, "BFlossPrevYrUndSameHeadSetoff": 0, "IncOfCurYrAfterSetOffBFLosses": 0 } },
+        "IncomeOfCurrYrAftCYLABFLA": 0
+      },
+      "PartB-TI": {
+        "Salaries": 0,
+        "IncomeFromHP": 0,
+        "CapGain": {
+          "ShortTerm": { "ShortTermAppRate": 0, "ShortTerm20Per": 0, "TotalShortTerm": 0 },
+          "LongTerm": { "LongTerm12_5Per": 0, "TotalLongTerm": 0 },
+          "ShortTermLongTermTotal": 0,
+          "TotalCapGains": 0
+        },
+        "IncFromOS": { "OtherSrcThanOwnRaceHorse": 0, "TotIncFromOS": 0 },
+        "GrossTotalIncome": 0,
+        "IncChargeTaxSplRate111A112": 0,
+        "DeductionsUnderScheduleVIA": 0,
+        "TotalIncome": 0,
+        "AggregateIncome": 0
+      },
+      "PartB_TTI": {
+        "ComputationOfTaxLiability": {
+          "TaxPayableOnTI": { "TaxAtNormalRatesOnAggrInc": 0, "TaxAtSpecialRates": 0, "TaxPayableOnTotInc": 0 },
+          "Rebate87A": 0,
+          "TaxPayableOnRebate": 0,
+          "EducationCess": 0,
+          "GrossTaxLiability": 0,
+          "GrossTaxPayable": 0,
+          "NetTaxLiability": 0,
+          "IntrstPay": { "IntrstPayUs234A": 0, "IntrstPayUs234B": 0, "IntrstPayUs234C": 0, "LateFilingFee234F": 0, "TotalIntrstPay": 0 },
+          "AggregateTaxInterestLiability": 0
+        },
+        "TaxPaid": {
+          "TaxesPaid": { "AdvanceTax": 0, "SelfAssessmentTax": 0, "TDS": 0, "TCS": 0, "TotalTaxesPaid": 0 },
+          "BalTaxPayable": 0
+        },
+        "Refund": {
+          "RefundDue": 0,
+          "BankAccountDtls": {
+            "BankDtlsFlag": "Y",
+            "AddtnlBankDetails": [
+              { "IFSCCode": "<IFSC>", "BankName": "<Bank>", "BankAccountNo": "<Account No>", "UseForRefund": "true", "AccountType": "SB" }
+            ]
+          }
+        },
+        "AssetOutIndiaFlag": "NO"
+      }
+    }
+  }
+}
