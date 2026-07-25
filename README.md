@@ -28,6 +28,10 @@ None of these are shipped — they are user-specific and must be added locally:
   [`sahilgupta/sbi-fx-ratekeeper`](https://github.com/sahilgupta/sbi-fx-ratekeeper)
   repo (columns `DATE, TT BUY, ...`).
 - `rbi_ref.csv` — optional manual `date,rate` overrides (for pre-dataset dates).
+- `usd_inr.csv` — optional **consolidated** USD→INR series (columns `date, tt_buy,
+  tt_sell, source`) merging authoritative SBI TT BUY with pre-2020 / SBI-outage
+  estimates. When present, `schedule_fa.py` reads it first (falls back to
+  `rbi_ref.csv` + `sbi_usd.csv`). See SKILL.md §7a for the ECB backfill method.
 - `<ticker>.csv` — daily close price export (investing.com / Yahoo "Historical
   Data"), e.g. `msft.csv`, `qcom.csv`, `intel.csv`.
 

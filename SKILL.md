@@ -191,7 +191,13 @@ on each relevant date (Explanation to Rule 26; SBI TTBR is the Schedule FA refer
 The "peak balance during the period" needs a **daily price series** to find the true
 intra-year high, not just the closing price.
 
-### 7a. SBI TT buying rate history → `sbi_usd.csv`
+### 7a. SBI TT buying rate history → `sbi_usd.csv` (or consolidated `usd_inr.csv`)
+
+> **Preferred single source:** a consolidated **`usd_inr.csv`** (columns
+> `date, tt_buy, tt_sell, source`) can replace the two-file setup. `schedule_fa.py`
+> loads it first via `load_usd_inr` (reads `tt_buy`); if it is absent it falls back to
+> `rbi_ref.csv` (overrides) + `sbi_usd.csv`. The `source` column marks each row as
+> authoritative (`SBI_TTBUY`) or an estimate (`xls_mid-0.425`, `ECB-0.39`).
 1. Source: **`sahilgupta/sbi-fx-ratekeeper`** on GitHub — download **`SBI_REFERENCE_RATES_USD.csv`**
    (it aggregates SBI's daily reference-rate PDFs). Save it as `schedule_fa/sbi_usd.csv`.
 2. Columns used: **`DATE`** and **`TT BUY`** (ignore TT SELL / bill rates). Loader
@@ -207,7 +213,19 @@ intra-year high, not just the closing price.
    and fixed before filing.
 5. Access in code: `schedule_fa._rate_for(iso_date)` returns the rate for any ISO date
    (exact → nearest-prior → fallback).
-6. **10-year range:** also pull **USD/INR daily history for the last 10 years** from
+6. **Pre-2020 / SBI-outage backfill (estimates):** the SBI ratekeeper dataset only starts
+   **2020-01-06**, and has multi-day non-publish gaps (e.g. COVID Apr–Jun 2020, Aug 2021).
+   To fill those in `rbi_ref.csv` / `usd_inr.csv`, both methods below are **calibrated to
+   actual SBI TT BUY** and give an estimated TT BUY (flag as estimates, prefer the exact
+   SBI PDF for a filed date):
+   - **From an SBI TT *mid* export** (e.g. a bank's INR/USD sheet): `TT BUY ≈ mid − 0.425`
+     (SBI applies a fixed ~₹0.85 TT buy/sell spread; half = 0.425).
+   - **From the ECB reference rate** (free, no key, daily back to 1999) via
+     `https://api.frankfurter.app/<start>..<end>?base=USD&symbols=INR`:
+     `TT BUY ≈ ECB − 0.39` (median `SBI_TTBUY − ECB = −0.393` over 185 overlapping 2020 days).
+     Fill only genuine **multi-day outages**; leave 1–2 day holidays to the working-day rule.
+   `tt_sell` for an estimated row = `tt_buy + 0.85`.
+7. **10-year range:** also pull **USD/INR daily history for the last 10 years** from
    investing.com (Currencies → USD/INR → Historical Data → set range ~10y, export CSV).
    Use it as a **cross-check / fallback** for acquisition dates that predate the SBI
    ratekeeper dataset (older vests). Note: the **SBI TT buying rate stays authoritative**

@@ -6,9 +6,13 @@ This is a SCRUBBED, DATA-FREE engine intended for distribution. It contains NO
 personal financial data — only generic loaders and conversion helpers. Supply
 your own data files (all optional; missing files degrade gracefully):
 
+  - usd_inr.csv     Consolidated USD->INR SBI TT rates (columns: date, tt_buy,
+                    tt_sell, source). Preferred single source when present; merges
+                    authoritative SBI TT BUY with pre-2020 / outage estimates.
   - sbi_usd.csv     SBI TT-buying reference rates (USD->INR). Export
                     SBI_REFERENCE_RATES_USD.csv from the public
                     `sahilgupta/sbi-fx-ratekeeper` repo. Columns: DATE, TT BUY, ...
+                    Used as a fallback when usd_inr.csv is absent.
   - rbi_ref.csv     Optional manual overrides, simple `date,rate` CSV (# comments ok).
                     Takes precedence over sbi_usd.csv (use for pre-dataset dates).
   - <ticker>.csv    Daily close price (USD) for a ticker, investing.com / Yahoo
@@ -87,6 +91,35 @@ def load_sbi_ttbr(path: Path) -> dict:
     return rates
 
 
+def load_usd_inr(path: Path) -> dict:
+    """Parse the consolidated usd_inr.csv (columns: date, tt_buy, tt_sell, source);
+    use the 'tt_buy' column. Comment lines starting with '#' are skipped."""
+    rates = {}
+    if not path.exists():
+        return rates
+    with path.open(newline="") as f:
+        reader = csv.reader(f)
+        header = None
+        for row in reader:
+            if not row or not row[0].strip() or row[0].lstrip().startswith("#"):
+                continue
+            if header is None:
+                header = [c.strip().lower() for c in row]
+                continue
+            rec = dict(zip(header, row))
+            iso = _to_iso(rec.get("date", ""))
+            raw = (rec.get("tt_buy") or "").strip().replace(",", "")
+            if not iso or not raw:
+                continue
+            try:
+                val = float(raw)
+            except ValueError:
+                continue
+            if val > 0:
+                rates[iso] = val
+    return rates
+
+
 def load_price_series(path: Path) -> dict:
     """Daily close price (USD) by ISO date from an investing.com-style CSV
     (columns: Date, Price, Open, High, Low, ...)."""
@@ -106,9 +139,12 @@ def load_price_series(path: Path) -> dict:
     return series
 
 
-# SBI TT buying rates (primary); rbi_ref.csv supplies manual overrides / pre-dataset dates.
-FX_RATES = {**load_simple_rates(_BASE / "rbi_ref.csv"),
-            **load_sbi_ttbr(_BASE / "sbi_usd.csv")}
+# Primary source: the consolidated usd_inr.csv (SBI TT BUY + pre-2020/outage estimates).
+# If it is absent, fall back to the two-file setup (rbi_ref.csv overrides sbi_usd.csv).
+FX_RATES = load_usd_inr(_BASE / "usd_inr.csv") or {
+    **load_simple_rates(_BASE / "rbi_ref.csv"),
+    **load_sbi_ttbr(_BASE / "sbi_usd.csv"),
+}
 
 # Fallback used (and should be flagged) only when no rate at/before a date exists.
 FALLBACK_RATE = FX_RATES.get(PERIOD_END.isoformat(), 89.47)
